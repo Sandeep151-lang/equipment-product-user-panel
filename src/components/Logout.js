@@ -1,0 +1,27 @@
+import React, { useEffect, useContext } from 'react'
+// import axios from 'axios'
+import { useHistory } from 'react-router'
+import { MyContext } from '../App'
+import LoadingSpinners from './LoadingSpinner'
+import { Axios } from './commonApi/commonApi'
+
+const Logout = () => {
+    const { dispatch } = useContext(MyContext)
+    const history = useHistory();
+    useEffect(() => {
+        Axios.post('/logout').then((res) => {
+            localStorage.removeItem(["hiringJwt",'role','id']);
+            
+            dispatch({ type: 'USER', payload: false })
+            history.push('/login', { replace: true })
+        })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dispatch({ type: 'USER', payload: false })])
+    return (
+        <div>
+            <LoadingSpinners />
+        </div>
+    )
+}
+
+export default Logout
