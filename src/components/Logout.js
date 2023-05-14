@@ -10,8 +10,9 @@ const Logout = () => {
     const history = useHistory();
     useEffect(() => {
         Axios.post('/logout').then((res) => {
-            localStorage.removeItem(["hiringJwt",'role','id']);
-            
+            localStorage.removeItem("hiringJwt");
+            localStorage.removeItem('role')
+            localStorage.removeItem("id")
             dispatch({ type: 'USER', payload: false })
             history.push('/login', { replace: true })
         })
