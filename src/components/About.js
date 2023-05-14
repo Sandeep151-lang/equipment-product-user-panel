@@ -16,7 +16,7 @@ const About = () => {
 
                 <div className='w3-container'>
 
-                    <h1 className="text-center">Admin Details</h1>
+                    <h1 className="text-center">{role==="user" ? "User Details" : "Admin Details"}</h1>
 
                     <div className="container mt-5" style={{ "width": "80%", "height": "70%" }}>
                         <Card>

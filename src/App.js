@@ -70,12 +70,12 @@ function App() {
       <Route
         {...rest}
         render={props =>
-          token || adminToken ? (
+          adminToken ==="user" ? (
             <Component {...props} />
           ) : (
             <Redirect
               to={{
-                pathname: "/login",
+                pathname: "/",
               }}
             />
           )
@@ -89,12 +89,31 @@ function App() {
       <Route
         {...rest}
         render={props =>
-          adminToken ? (
+          adminToken==="admin" ? (
             <Component {...props} />
           ) : (
             <Redirect
               to={{
-                pathname: "/login",
+                pathname: "/",
+              }}
+            />
+          )
+        }
+      />
+    );
+  }
+
+  function LoginPrivateRoute({ component: Component, ...rest }) {
+    return (
+      <Route
+        {...rest}
+        render={props =>
+          !token ? (
+            <Component {...props} />
+          ) : (
+            <Redirect
+              to={{
+                pathname: "/",
               }}
             />
           )
@@ -112,10 +131,10 @@ function App() {
           <Route path="/cart" component={Cart} />
           <Route path="/cat/:name" component={HomePage} />
           <Route path="/details/:_id" component={ProductDetail} />
-          <Route path="/Register" component={Register} />
-          <Route path="/login" component={Login} />
           <Route path='/logout' component={Logout} />
+          <LoginPrivateRoute path="/Register" component={Register} />
           <Route path="/products/:_id" component={ProductDetails} />
+          <LoginPrivateRoute path="/login" component={Login} />
           <PrivateRoute path='/user/:_id' component={UserOrder} />
           <PrivateRoute path='/my-order' component={MyOrder} />
           <PrivateRoute path="/about" component={About} />
