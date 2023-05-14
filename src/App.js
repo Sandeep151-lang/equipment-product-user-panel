@@ -103,6 +103,25 @@ function App() {
     );
   }
 
+  function UserAdminRoute({ component: Component, ...rest }) {
+    return (
+      <Route
+        {...rest}
+        render={props =>
+          adminToken ? (
+            <Component {...props} />
+          ) : (
+            <Redirect
+              to={{
+                pathname: "/",
+              }}
+            />
+          )
+        }
+      />
+    );
+  }
+
   function LoginPrivateRoute({ component: Component, ...rest }) {
     return (
       <Route
@@ -122,6 +141,7 @@ function App() {
     );
   }
 
+
   return <>
     <Router>
       <MyContext.Provider value={{ userdata, onRemove, onAdd, data, cartItems, state, dispatch }}>
@@ -132,11 +152,11 @@ function App() {
           <Route path="/cat/:name" component={HomePage} />
           <Route path="/details/:_id" component={ProductDetail} />
           <Route path='/logout' component={Logout} />
-          <LoginPrivateRoute path="/Register" component={Register} />
           <Route path="/products/:_id" component={ProductDetails} />
+          <UserAdminRoute path='/my-order' component={MyOrder} />
+          <LoginPrivateRoute path="/Register" component={Register} />
           <LoginPrivateRoute path="/login" component={Login} />
           <PrivateRoute path='/user/:_id' component={UserOrder} />
-          <PrivateRoute path='/my-order' component={MyOrder} />
           <PrivateRoute path="/about" component={About} />
           <AdminPrivateRoute path='/create' component={CreaProduct} />
           <AdminPrivateRoute path='/dashboard' component={AdminDashboard} />
