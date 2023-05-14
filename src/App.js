@@ -156,7 +156,7 @@ function App() {
           <UserAdminRoute path='/my-order' component={MyOrder} />
           <LoginPrivateRoute path="/Register" component={Register} />
           <LoginPrivateRoute path="/login" component={Login} />
-          <PrivateRoute path='/user/:_id' component={UserOrder} />
+          <UserAdminRoute path='/user/:_id' component={UserOrder} />
           <PrivateRoute path="/about" component={About} />
           <AdminPrivateRoute path='/create' component={CreaProduct} />
           <AdminPrivateRoute path='/dashboard' component={AdminDashboard} />
