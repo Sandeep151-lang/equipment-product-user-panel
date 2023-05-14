@@ -11,6 +11,7 @@ import { Axios } from './commonApi/commonApi';
 
 const Stripe = (props) => {
     const { total, name, email, cart, id, starttime, endtime, Total } = props;
+    const token = localStorage.getItem('hiringJwt')
   
     const handleToken = async (token) => {
         //console.log(token)
@@ -41,7 +42,7 @@ const Stripe = (props) => {
         }
     }
 
-    if (name) {
+    if (token) {
         return (
             <StripeCheckout
                 email={email}
