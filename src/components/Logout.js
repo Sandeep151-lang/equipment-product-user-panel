@@ -10,14 +10,16 @@ const Logout = () => {
     const history = useHistory();
     useEffect(() => {
         Axios.post('/logout').then((res) => {
-            localStorage.removeItem("hiringJwt");
-            localStorage.removeItem('role')
-            localStorage.removeItem("id")
-            dispatch({ type: 'USER', payload: false })
-            history.push('/login', { replace: true })
+            if(res){
+                localStorage.removeItem("hiringJwt");
+                localStorage.removeItem('role')
+                localStorage.removeItem("id")
+                dispatch({ type: 'USER', payload: false })
+                history.push('/login', { replace: true })
+            }
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dispatch({ type: 'USER', payload: false })])
+    }, [])
     return (
         <div>
             <LoadingSpinners />
