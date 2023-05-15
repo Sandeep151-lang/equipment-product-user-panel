@@ -65,24 +65,24 @@ function App() {
 
   const adminToken = localStorage.getItem('role')
 
-  function PrivateRoute({ component: Component, ...rest }) {
-    return (
-      <Route
-        {...rest}
-        render={props =>
-          adminToken ==="user" ? (
-            <Component {...props} />
-          ) : (
-            <Redirect
-              to={{
-                pathname: "/",
-              }}
-            />
-          )
-        }
-      />
-    );
-  }
+  // function PrivateRoute({ component: Component, ...rest }) {
+  //   return (
+  //     <Route
+  //       {...rest}
+  //       render={props =>
+  //         adminToken ==="user" ? (
+  //           <Component {...props} />
+  //         ) : (
+  //           <Redirect
+  //             to={{
+  //               pathname: "/",
+  //             }}
+  //           />
+  //         )
+  //       }
+  //     />
+  //   );
+  // }
 
   function AdminPrivateRoute({ component: Component, ...rest }) {
     return (
