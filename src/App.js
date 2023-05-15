@@ -153,11 +153,11 @@ function App() {
           <Route path="/details/:_id" component={ProductDetail} />
           <Route path='/logout' component={Logout} />
           <Route path="/products/:_id" component={ProductDetails} />
-          <UserAdminRoute path='/my-order' component={MyOrder} />
           <LoginPrivateRoute path="/Register" component={Register} />
           <LoginPrivateRoute path="/login" component={Login} />
+          <UserAdminRoute path='/my-order' component={MyOrder} />
           <UserAdminRoute path='/user/:_id' component={UserOrder} />
-          <PrivateRoute path="/about" component={About} />
+          <UserAdminRoute path="/about" component={About} />
           <AdminPrivateRoute path='/create' component={CreaProduct} />
           <AdminPrivateRoute path='/dashboard' component={AdminDashboard} />
           <AdminPrivateRoute path="/user" component={UserDetails} />
