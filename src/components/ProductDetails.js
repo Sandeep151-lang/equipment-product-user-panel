@@ -19,28 +19,25 @@ const ProductDetails = () => {
     const [data, setdata] = useState([])
 
     const history = useHistory()
-    const userdata = async () => {
-        try {
-            const res = await Axios.get('/about')
-
-            if (res.status === 200) {
-                localStorage.getItem('jwt');
-                setloading(false);
-            }
-        } catch (err) {
-            history.push('/login')
-        }
-    }
-
 
 
     const loaduser = async () => {
-        const res = await Axios.get(`/product/${_id}`)
-        console.log(res)
-        setaddress(res.data.item.shippingAddress)
-        setitem(res.data.item)
-        setdata(res.data.item.cartItems)
-        console.log(res.data.item)
+        setloading(true)
+        try {
+            const res = await Axios.get(`/product/${_id}`)
+            if(res){
+                setaddress(res.data.item.shippingAddress)
+                setitem(res.data.item)
+                setdata(res.data.item.cartItems)
+                setloading(false)
+            }
+
+       
+        } catch (error) {
+            setloading(false)
+        }
+        
+       
     }
     async function onChangeInput(value) {
         setselect(value)
@@ -58,22 +55,19 @@ const ProductDetails = () => {
     ]
 
     useEffect(() => {
-        userdata();
+        
         loaduser();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 
-    if (loading) {
-        return <LoadingSpinners />
-    } else {
-
+   
         return (
             <>
                 <Navbar />
 
                 <div className='container'>
-
+            {loading && <LoadingSpinners/>}
                     <h1 className='text-center mt-5 mb-3'>Details</h1>
                     <Row>
                         <Col sm={8}>
@@ -145,7 +139,7 @@ const ProductDetails = () => {
             </>
         )
 
-    }
+    
 }
 
 export default ProductDetails
