@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 // import axios from 'axios';
 import Select from 'react-select'
 //import { Stepper, Step } from 'react-form-stepper';
@@ -11,14 +11,12 @@ import { Axios } from './commonApi/commonApi';
 
 const ProductDetails = () => {
     const { _id } = useParams();
-    console.log(_id)
     const [sel, setselect] = useState()
     const [address, setaddress] = useState([])
     const [items, setitem] = useState([])
     const [loading, setloading] = useState(true);
     const [data, setdata] = useState([])
 
-    const history = useHistory()
 
 
     const loaduser = async () => {
@@ -67,8 +65,8 @@ const ProductDetails = () => {
                 <Navbar />
 
                 <div className='container'>
-            {loading && <LoadingSpinners/>}
                     <h1 className='text-center mt-5 mb-3'>Details</h1>
+            {loading && <LoadingSpinners/>}
                     <Row>
                         <Col sm={8}>
                             <div className="w3-container">
